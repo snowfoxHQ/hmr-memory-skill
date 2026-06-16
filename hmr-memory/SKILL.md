@@ -1,7 +1,7 @@
 ---
 name: hmr-memory
 description: Persistent cross-session memory for your agent, powered by HMR (Hestia Memory Runtime). Save important facts and preferences, recall relevant context, and restore cognitive state across sessions.
-version: 1.1.0
+version: 1.0.0
 homepage: https://github.com/snowfoxHQ/HMR
 license: MIT
 metadata: {"requires": ["HMR service running on http://127.0.0.1:8077"], "category": "memory"}
@@ -99,34 +99,6 @@ on every request:
 X-HMR-Token: <the token>
 ```
 Configure the token via the skill's `env` setting, never paste it into chat.
-
-### Recover from search failures — `/reindex`
-
-If `memory_recall` fails with a 409 error saying the vector index doesn't match
-the embedding provider, the index needs rebuilding (this happens after the
-embedding provider/model changes). Trigger an automatic rebuild:
-
-```
-POST http://127.0.0.1:8077/reindex
-```
-
-This rebuilds the vector index from stored memories using the current provider.
-No need to stop the service or run manual commands. After it returns, retry the
-recall. You can also check `/health` — if `status` is `degraded` with a warning
-about the embedding provider, call `/reindex` to fix it.
-
-### Check service health before relying on memory
-
-Before a session that depends on memory, verify the service is up and healthy:
-
-```
-GET http://127.0.0.1:8077/health
-```
-
-A healthy response has `status: ok`. If `status` is `degraded`, follow the
-`warning` field (usually: call `/reindex`). If the request fails entirely, the
-HMR service isn't running — start it with `python server.py` in the HMR
-project's `service/` directory.
 
 ## Safety notes
 

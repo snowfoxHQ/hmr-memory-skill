@@ -1,0 +1,40 @@
+name: Validate Skill
+
+# 每次 push 和 PR 都自动校验 SKILL.md 格式合规
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # 允许手动触发
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate SKILL.md compliance
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate skill structure
+        run: python scripts/validate_skill.py
+
+      - name: Check required files exist
+        run: |
+          for f in SKILL.md README.md package.json LICENSE; do
+            if [ ! -f "$f" ]; then
+              echo "::error::缺少必需文件: $f"
+              exit 1
+            fi
+            echo "✓ $f 存在"
+          done
+
+      - name: Validate package.json is valid JSON
+        run: python -c "import json; json.load(open('package.json')); print('✓ package.json 是合法 JSON')"
