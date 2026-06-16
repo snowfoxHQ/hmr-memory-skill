@@ -1,6 +1,6 @@
 {
   "name": "hmr-memory",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Persistent cross-session memory for OpenClaw agents, powered by HMR (Hestia Memory Runtime)",
   "keywords": ["openclaw", "agent-skill", "memory", "hmr", "persistent-memory", "cross-session"],
   "license": "MIT",
