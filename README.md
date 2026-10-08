@@ -1,5 +1,9 @@
 # HMR Memory — OpenClaw Skill
 
+[![版本](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/snowfoxHQ/hmr-memory-skill)
+[![许可证](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-Skill-2B77BF)](https://github.com/snowfoxHQ/hmr-memory-skill)
+
 > English version: [README_EN.md](README_EN.md)
 
 给你的 OpenClaw agent 加上**跨会话的持久记忆**。
